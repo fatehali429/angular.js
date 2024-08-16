@@ -1,0 +1,13 @@
+{
+  "name": "angular-extended",
+  "description": "Extended version of AngularJS",
+  "version": "1.0.3",
+  "main": "index.js",
+  "files": [
+    "/*"
+  ],
+  "author": "fatehali429@hotmail.com",
+  "scripts": {
+    "prepublishOnly": "echo 'Preparing for publish...'"
+  }
+}

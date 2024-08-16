@@ -1,6 +1,6 @@
 {
   "name": "angular-extended",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "license": "MIT",
   "branchVersion": "^1.0.0",
   "branchPattern": "1.0.*",
@@ -16,7 +16,7 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "package": "grunt minify --verbose",
+    "build": "grunt build-package",
     "test-i18n": "jasmine-node i18n/spec",
     "test-i18n-ucd": "jasmine-node i18n/ucd/spec"
   },

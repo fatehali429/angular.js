@@ -408,6 +408,12 @@ module.exports = function(grunt) {
             expand: true
           }
         ]
+      },
+      copy2publish: {
+        expand: true, // Enable dynamic expansion
+        cwd: 'build/', // Source directory
+        src: ['angular.*', 'angular-csp.*', 'bower.json', 'LICENSE.md', 'README.md'], // Files to copy
+        dest: 'publish/' // Destination directory
       }
     },
 
@@ -498,6 +504,10 @@ module.exports = function(grunt) {
     'clean',
     'build',
     'minall'
+  ]);
+  grunt.registerTask('build-package', [
+    'minify',
+    'copy:copy2publish'
   ]);
   grunt.registerTask('webserver', ['connect:devserver']);
   grunt.registerTask('package', [
