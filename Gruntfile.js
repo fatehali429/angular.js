@@ -9,10 +9,14 @@ var util = require('./lib/grunt/utils.js');
 var versionInfo = require('./lib/versions/version-info');
 var path = require('path');
 var e2e = require('./test/e2e/tools');
-
+var fs = require('fs');
+var shell = require('shelljs');
 var semver = require('semver');
 var exec = require('shelljs').exec;
 var pkg = require(__dirname + '/package.json');
+var outFolder = 'dist/';
+
+var projectPath = path.resolve(__dirname);
 
 var codeScriptFolder = util.codeScriptFolder;
 var docsScriptFolder = util.docsScriptFolder;
@@ -409,11 +413,11 @@ module.exports = function(grunt) {
           }
         ]
       },
-      copy2publish: {
+      copy2dist: {
         expand: true, // Enable dynamic expansion
         cwd: 'build/', // Source directory
-        src: ['angular.*', 'angular-csp.*', 'bower.json', 'LICENSE.md', 'README.md'], // Files to copy
-        dest: 'publish/' // Destination directory
+        src: ['angular.*', 'angular-csp.*', 'LICENSE.md', 'README.md'], // Files to copy
+        dest: outFolder // Destination directory
       }
     },
 
@@ -507,7 +511,8 @@ module.exports = function(grunt) {
   ]);
   grunt.registerTask('build-package', [
     'minify',
-    'copy:copy2publish'
+    'copy:copy2dist',
+    'update-package-json'
   ]);
   grunt.registerTask('webserver', ['connect:devserver']);
   grunt.registerTask('package', [
@@ -530,6 +535,44 @@ module.exports = function(grunt) {
     'copy:deployFirebaseCode',
     'copy:deployFirebaseDocs'
   ]);
+   // Create the bower.json file
+  grunt.registerTask('update-package-json', function() {
+    // Copies a file into the release directory
+  function copyIntoRelease(taggedReleaseDir, filePath) {
+    var file = path.resolve(projectPath, filePath);
+
+    shell.cp('-f', file, taggedReleaseDir);
+  }
+
+    var taggedReleaseDir = path.join(path.resolve(process.cwd()), outFolder);
+
+    // Copy a index.js file
+    copyIntoRelease(taggedReleaseDir, 'build_assets/index.js');
+
+    var pkgJsonFile = path.join(taggedReleaseDir, 'package.json');
+
+    var json = {
+      'name': pkg.name,
+      'description': pkg.description,
+      'version': pkg.version,
+      'main': 'index.js',
+      'repository': pkg.repository,
+      'keywords': pkg.keywords,
+      'files': [
+        '/*'
+      ],
+      'author': 'fatehali429@hotmail.com',
+      'scripts': {
+        'prepublishOnly': 'echo \'Preparing for publish...\''
+      },
+      'license': pkg.license
+    };
+
+    // For package.json
+    json.version = pkg.version;
+
+    fs.writeFileSync(pkgJsonFile, JSON.stringify(json, null, 2));
+  });
   grunt.registerTask('default', ['package']);
 };
 

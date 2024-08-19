@@ -1,6 +1,7 @@
 {
   "name": "angular-extended",
-  "version": "1.0.3",
+  "description": "Extended version of AngularJS",
+  "version": "1.0.4",
   "license": "MIT",
   "branchVersion": "^1.0.0",
   "branchPattern": "1.0.*",

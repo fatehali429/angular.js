@@ -34,7 +34,7 @@ function parsePattern(pattern) {
             minInt: 1,
             minFrac: 0,
             maxFrac: 0,
-            posPre: '',
+            posPre: '+',
             posSuf: '',
             negPre: '',
             negSuf: '',

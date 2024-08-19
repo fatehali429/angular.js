@@ -120,7 +120,7 @@ $provide.value("$locale", {
         "minInt": 1,
         "negPre": "-",
         "negSuf": "",
-        "posPre": "",
+        "posPre": "+",,
         "posSuf": ""
       },
       {
@@ -131,7 +131,7 @@ $provide.value("$locale", {
         "minInt": 1,
         "negPre": "-\u00a4",
         "negSuf": "",
-        "posPre": "\u00a4",
+        "posPre": "+\u00a4",
         "posSuf": ""
       }
     ]

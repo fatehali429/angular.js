@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.0.0-local+sha.9dc629e17
+ * @license AngularJS v1.0.0-local+sha.2f090315f
  * (c) 2010-2020 Google LLC. http://angularjs.org
  * License: MIT
  */
@@ -99,7 +99,7 @@ function isValidObjectMaxDepth(maxDepth) {
 function minErr(module, ErrorConstructor) {
   ErrorConstructor = ErrorConstructor || Error;
 
-  var url = 'https://errors.angularjs.org/1.0.0-local+sha.9dc629e17/';
+  var url = 'https://errors.angularjs.org/1.0.0-local+sha.2f090315f/';
   var regex = url.replace('.', '\\.') + '[\\s\\S]*';
   var errRegExp = new RegExp(regex, 'g');
 
@@ -2828,7 +2828,7 @@ function toDebugString(obj, maxDepth) {
 var version = {
   // These placeholder strings will be replaced by grunt's `build` task.
   // They need to be double- or single-quoted.
-  full: '1.0.0-local+sha.9dc629e17',
+  full: '1.0.0-local+sha.2f090315f',
   major: 1,
   minor: 0,
   dot: 0,
@@ -2983,7 +2983,7 @@ function publishExternalAPI(angular) {
       });
     }
   ])
-  .info({ angularVersion: '1.0.0-local+sha.9dc629e17' });
+  .info({ angularVersion: '1.0.0-local+sha.2f090315f' });
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -36569,7 +36569,7 @@ $provide.value("$locale", {
         "minInt": 1,
         "negPre": "-",
         "negSuf": "",
-        "posPre": "",
+        "posPre": "+",
         "posSuf": ""
       },
       {
@@ -36580,7 +36580,7 @@ $provide.value("$locale", {
         "minInt": 1,
         "negPre": "-\u00a4",
         "negSuf": "",
-        "posPre": "\u00a4",
+        "posPre": "+\u00a4",
         "posSuf": ""
       }
     ]
