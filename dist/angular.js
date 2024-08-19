@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.0.0-local+sha.2f090315f
+ * @license AngularJS v1.0.0-local+sha.8d57b0be2
  * (c) 2010-2020 Google LLC. http://angularjs.org
  * License: MIT
  */
@@ -99,7 +99,7 @@ function isValidObjectMaxDepth(maxDepth) {
 function minErr(module, ErrorConstructor) {
   ErrorConstructor = ErrorConstructor || Error;
 
-  var url = 'https://errors.angularjs.org/1.0.0-local+sha.2f090315f/';
+  var url = 'https://errors.angularjs.org/1.0.0-local+sha.8d57b0be2/';
   var regex = url.replace('.', '\\.') + '[\\s\\S]*';
   var errRegExp = new RegExp(regex, 'g');
 
@@ -2828,7 +2828,7 @@ function toDebugString(obj, maxDepth) {
 var version = {
   // These placeholder strings will be replaced by grunt's `build` task.
   // They need to be double- or single-quoted.
-  full: '1.0.0-local+sha.2f090315f',
+  full: '1.0.0-local+sha.8d57b0be2',
   major: 1,
   minor: 0,
   dot: 0,
@@ -2983,7 +2983,7 @@ function publishExternalAPI(angular) {
       });
     }
   ])
-  .info({ angularVersion: '1.0.0-local+sha.2f090315f' });
+  .info({ angularVersion: '1.0.0-local+sha.8d57b0be2' });
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -11219,11 +11219,21 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
       );
     }
 
+    function parseSrcset(value) {
+      var pattern = /(\s*d+w\s*)/g;
+      var results = [];
+      var match;
+
+      while ((match = pattern.exec(value)) != null) {
+        results.push(match[0].trim());
+      }
+    }
+
     function addAttrInterpolateDirective(node, directives, value, name, isNgAttr) {
       var nodeName = nodeName_(node);
       var trustedContext = getTrustedAttrContext(nodeName, name);
       var mustHaveExpression = !isNgAttr;
-      var allOrNothing = ALL_OR_NOTHING_ATTRS[name] || isNgAttr;
+      var allOrNothing = parseSrcset(ALL_OR_NOTHING_ATTRS[name]) || isNgAttr;
 
       var interpolateFn = $interpolate(value, mustHaveExpression, trustedContext, allOrNothing);
 

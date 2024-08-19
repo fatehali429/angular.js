@@ -3897,11 +3897,21 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
       );
     }
 
+    function parseSrcset(value) {
+      var pattern = /(\s*d+w\s*)/g;
+      var results = [];
+      var match;
+
+      while ((match = pattern.exec(value)) != null) {
+        results.push(match[0].trim());
+      }
+    }
+
     function addAttrInterpolateDirective(node, directives, value, name, isNgAttr) {
       var nodeName = nodeName_(node);
       var trustedContext = getTrustedAttrContext(nodeName, name);
       var mustHaveExpression = !isNgAttr;
-      var allOrNothing = ALL_OR_NOTHING_ATTRS[name] || isNgAttr;
+      var allOrNothing = parseSrcset(ALL_OR_NOTHING_ATTRS[name]) || isNgAttr;
 
       var interpolateFn = $interpolate(value, mustHaveExpression, trustedContext, allOrNothing);
 
